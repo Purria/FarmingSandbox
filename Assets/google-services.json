@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "403986155999",
+    "firebase_url": "https://farming-in-purria.firebaseio.com",
+    "project_id": "farming-in-purria",
+    "storage_bucket": "farming-in-purria.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403986155999:android:4625b022d63ed9b3",
+        "android_client_info": {
+          "package_name": "com.farminginpurria.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403986155999-b91ot7li2pehn0vqiuvq1tc718lu7p8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwpQPzxdWiQIh04GWH5xE-A0BY2mNCVoQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

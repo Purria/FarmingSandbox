@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="firebase_database_url" translatable="false">https://farming-in-purria.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">403986155999</string>
+  <string name="google_storage_bucket" translatable="false">farming-in-purria.appspot.com</string>
+  <string name="project_id" translatable="false">farming-in-purria</string>
+  <string name="google_api_key" translatable="false">AIzaSyDwpQPzxdWiQIh04GWH5xE-A0BY2mNCVoQ</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDwpQPzxdWiQIh04GWH5xE-A0BY2mNCVoQ</string>
+  <string name="google_app_id" translatable="false">1:403986155999:android:4625b022d63ed9b3</string>
+  <string name="default_web_client_id" translatable="false">403986155999-b91ot7li2pehn0vqiuvq1tc718lu7p8v.apps.googleusercontent.com</string>
+</resources>
