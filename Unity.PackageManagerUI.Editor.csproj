@@ -325,17 +325,17 @@
     <Reference Include="Unity.Tasks">
       <HintPath>Assets/Parse/Plugins/Unity.Tasks.dll</HintPath>
     </Reference>
-    <Reference Include="Google.IOSResolver_v1.2.61.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.61.0.dll</HintPath>
+    <Reference Include="Google.IOSResolver_v1.2.92.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.92.0.dll</HintPath>
     </Reference>
-    <Reference Include="Google.JarResolver_v1.2.61.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.61.0.dll</HintPath>
+    <Reference Include="Google.JarResolver_v1.2.92.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.92.0.dll</HintPath>
     </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
     </Reference>
-    <Reference Include="Google.VersionHandlerImpl_v1.2.61.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.61.0.dll</HintPath>
+    <Reference Include="Google.VersionHandlerImpl_v1.2.92.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.92.0.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/stojc/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -440,7 +440,7 @@
     <None Include="Assets\Firebase\Editor\AppDependencies.xml" />
     <None Include="Assets\Firebase\Editor\AuthDependencies.xml" />
     <None Include="Assets\Firebase\Editor\FirebaseAnalytics_v4.4.3_manifest.txt" />
-    <None Include="Assets\Firebase\Editor\FirebaseAuth_v4.4.3_manifest.txt" />
+    <None Include="Assets\Firebase\Editor\FirebaseAuth_version-5.4.0_manifest.txt" />
     <None Include="Assets\Firebase\Editor\FirebaseDatabase_v4.4.3_manifest.txt" />
     <None Include="Assets\Firebase\Plugins\Http\link.xml" />
     <None Include="Assets\Firebase\Plugins\link.xml" />
@@ -448,10 +448,11 @@
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\Materials\VertexColors.shader" />
-    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.61.0.txt" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.92.0.txt" />
+    <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
+    <None Include="Assets\Prefabs\plants\dd\AlphaTest-Bumped.shader" />
     <None Include="Assets\Scripts\Plugins\Android\Firebase\AndroidManifest.xml" />
-    <None Include="Assets\plants\dd\AlphaTest-Bumped.shader" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Light.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Templates\Alert.uxml" />

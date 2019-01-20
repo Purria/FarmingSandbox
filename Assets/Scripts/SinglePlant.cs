@@ -6,24 +6,31 @@ using UnityEngine.UI;
 
 public class SinglePlant : MonoBehaviour {
 
-    [SerializeField] Text PlantInformations;
-    [SerializeField] Canvas InformationMenu;
-    public int PlantID;
-    public string value1;
-    public string value2;
 
+    public Plant singlePlant;
+    public static SinglePlant _Instance;
 
-    private void OnMouseOver()
+    private void Awake()
     {
-        InformationMenu.enabled = true;
-        PlantInformations.color = Color.white;
-        PlantInformations.text = string.Format("{0} {1} {2}", "You are currently seeing informations about Plant with ID " + PlantID, value1, value2);
-
+        _Instance = this;
     }
 
-    private void OnMouseExit()
-    {
-        InformationMenu.enabled = false;
 
+   // CHECK FOR THE PLANT STATUS, THERE WILL BE ENUMS THAT WILL CHACK THAT, TOO HIGH, TO LOW, NORMAL, OPTIMAL
+    public void AssignDroneToPlant(Button plant)
+    {
+        plant.GetComponent<Button>().image.sprite = UIManager.Instance.AssignedDroneSprite;
+    }
+
+
+    public void ShowDataForSelectedPlantInUIManager()
+    {
+        PlantUIManager._Instance.UpdateUIData(singlePlant);    
+    }
+
+    // setting the drone to selected plant from the PlantUIManager called OnTap on Drone button above the plant button
+    public void SetDroneForSelectedPlant(Button selectedDrone)
+    {
+        Drone._Instance.ActivateDrneOnPlant(singlePlant,selectedDrone);
     }
 }

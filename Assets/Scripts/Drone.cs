@@ -1,119 +1,61 @@
 ﻿using Firebase.Database;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Drone : MonoBehaviour {
-
-    [SerializeField] Text currentlyWorkingPlant;
+public class Drone : MonoBehaviour
+{
     int TempPlantID;
-    bool hasStarted;
-   public static bool canMove;
-    string tempValue1 = "New Testing Values  10/15/18";
-    string tempValue2 = "New Testing Values 10/15/18";
-    float timer;
-    GameObject ParentHolder;
+    DateTime currentDate;
+    public static string USERID;
+    public static Drone _Instance;
 
 
-    private void Start()
+    private void Awake()
     {
-        GameObject[] temp = GameObject.FindGameObjectsWithTag("Hex");
-        if(temp != null)
-        {
-            AddCollidersToHex(temp);
-            Debug.Log("adding collider to " + temp);
-        }
+        _Instance = this;
+        USERID = PlayerPrefs.GetString("ID");
     }
-    private void OnTriggerEnter(Collider other)
+
+    //Drone work for assigned plant
+    public void ActivateDrneOnPlant(Plant selectedPlant,Button selectedUIDrone)
     {
-       
-        if (other.tag == "plant")
-        {
+        TempPlantID = selectedPlant.PlantID;
+        currentDate = DateTime.Now;
+        PopulatePlantData(selectedPlant, "Plants", TempPlantID, currentDate);
+        selectedUIDrone.GetComponent<Image>().color = Color.green;
+        selectedUIDrone.transform.parent.GetComponent<Button>().GetComponentInChildren<Text>().text = "PlantID " + TempPlantID;
+        //ASSIGN 3D MODEL OF THE DRONE TO THE HEXAGON FIELD WHEN A DRONE IS PLACED IN THE UIMANAGER
+    }
 
-            hasStarted = true;
-            TempPlantID = other.GetComponent<SinglePlant>().PlantID;
-            ParentHolder = other.transform.parent.gameObject;
-        }
-        else { currentlyWorkingPlant.text = "The drone has completed the work"; }
 
-        //this will be changed in the future
-        if(TempPlantID == 0 )
-        {
-            canMove = false;
-            Debug.Log(" the drone is currently under the plant with ID " + TempPlantID); // update the exact plant id in the firebase database
-            PopulatePlantData("Plants", TempPlantID);
-            PopulateHexData("Hexses", TempPlantID);
-        }
 
-        if (TempPlantID == 1)
-        {
-            canMove = false;
-            StopAllCoroutines();
-            Debug.Log(" the drone is currently under the plant with ID " + TempPlantID); // update the exact plant id in the firebase database
-            PopulatePlantData("Plants", TempPlantID);
-            PopulateHexData("Hexses", TempPlantID);
-        }
+    public void PopulatePlantData(Plant plant,string referenceName, int referenceChildName, DateTime childrenReference)
+    {
+        var RootRef = FireBase.DBreference = FirebaseDatabase.DefaultInstance.GetReference("Plant" + " for user " + USERID);
+        var currDate = currentDate = DateTime.Now;
+        plant.Height = 5;// HERE ASIGN THE VALUES FROM THE DRONE POPUP ON WHAT TO CHANGE
+        plant.Weight = 10;
+        string res = JsonUtility.ToJson(plant);
+        RootRef.Child(referenceName).Child("PlantID " + referenceChildName.ToString()).Child(childrenReference.ToString()).SetRawJsonValueAsync(res);
+        PlayerPrefs.SetString("ID", USERID);
 
 
     }
-    void AddCollidersToHex(GameObject[] Hex)
-    {
-        foreach(var item in Hex)
-        {
-            item.AddComponent<BoxCollider>().isTrigger = true;
-        }
-    }
 
-    public void PopulatePlantData(string referenceName, int referenceChildName)
-    {
-        var RootRef = FireBase.DBreference = FirebaseDatabase.DefaultInstance.GetReference("Plant");
-        Plant p = new Plant();
-        p.ID = TempPlantID;
-        p.value1 = tempValue1;
-        p.value2 = tempValue2;
-        string res = JsonUtility.ToJson(p);
-        RootRef.Child(referenceName).Child(referenceChildName.ToString()).SetRawJsonValueAsync(res);
-        ParentHolder.GetComponent<MeshRenderer>().material.color = Color.green;
-    }
 
+    // this is not used at this moment, but it will be changed in the future
     public void PopulateHexData(string referenceName, int referenceChildName)
     {
         var HexRootRef = FireBase.DBreference = FirebaseDatabase.DefaultInstance.GetReference("Hex");
+        var currDate = currentDate = DateTime.Now;
         Hex hex = new Hex();
-        hex.ID = TempPlantID;
-        hex.value1 = "testing value for hex with plant ID " + hex.ID;
-        Debug.Log(hex.ID);
+        hex.UserId = USERID;
+        hex.HexID = TempPlantID;
         string res = JsonUtility.ToJson(hex);
-        HexRootRef.Child(referenceName).Child(referenceChildName.ToString()).SetRawJsonValueAsync(res);
-    }
-
-    private void Update()
-    {
-        MoveTheDrone();
-        if(hasStarted)
-        {
-            StartCoroutine(Delayed());
-            currentlyWorkingPlant.text = "The drone is currently working on a plant with ID " + TempPlantID;
-        }
     }
 
 
-    void MoveTheDrone()
-    {
-
-       // timer++;
-        if(timer >= 100) { canMove = true; timer = 0; }
-        if(canMove)
-        transform.position += Vector3.right * 1 * Time.deltaTime;
-
-    }
-
-    IEnumerator Delayed()
-    {
-        yield return new WaitForSeconds(2f);
-        canMove = true;
-
-
-    }   
 }

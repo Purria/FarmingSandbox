@@ -6,18 +6,23 @@ using UnityEngine;
 [Serializable]
 public class Plant
 {
-    public int ID;
-    public string value1;
-    public string value2;
+    public int PlantID;
+    public float Height;
+    public float LeavesQuantity;
+    public float LeavesWidth;
+    public float Weight;
+    public float HeatofPlant;
+    public float ColorofPlant;
+    public float SoilCover;
 }
 
 [Serializable]
 public class Hex
 {
-    public int ID;
+    public string UserId;
+    public int HexID;
     public string value1;
 }
-
 
 [Serializable]
 public class AllHexes
@@ -30,3 +35,4 @@ public class AllPlants
 {
     public List<Plant> Plants;
 }
+

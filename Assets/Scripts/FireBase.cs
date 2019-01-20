@@ -19,11 +19,13 @@ public class FireBase : MonoBehaviour
     public string DatabaseChanges;
     [SerializeField] SinglePlant[] singlePlant;
     [SerializeField] SingleHex[] singleHex;
-    [SerializeField] GameObject[] ActiveHexes;
-    [SerializeField] InputField HowMuchHexes;
     int HexesValue;
     [SerializeField] Canvas Menu;
     [SerializeField] Text warrning;
+    int PlantIDIncrementer;
+    int HexIdIncrementer;
+    public static string CurrentUserId;
+
     private void Awake()
     {
         Instance = this;
@@ -37,76 +39,32 @@ public class FireBase : MonoBehaviour
 
     private void Start()
     {
-
+        CurrentUserId = PlayerPrefs.GetString("user");
         FirebaseDatabase.DefaultInstance
-        .GetReference("Plant")
-        .ValueChanged += HandleValueChanged;
+        //.GetReference("Plant")
+       .GetReference("Plant" + " for user " + CurrentUserId)
+       .ValueChanged += HandleValueChanged;
+
     }
 
     public void GetValueFromInput()
     {
-        var r = HowMuchHexes.text;
+        var r = UIManager.Instance.HowMuchHexes.text;
         if (r.Equals("21")) { warrning.text = " only 20 hexes can be drawn"; }
         else
         {
-            Drone.canMove = true;
             int.TryParse(r, out HexesValue);
             Debug.Log(HexesValue);
+            UIManager.Instance.HowMuchPlantsArePlented = HexesValue;
             Menu.enabled = false;
             for (int i = 0; i < HexesValue; i++)
             {
-                ActiveHexes[i].SetActive(true);
+                UIManager.Instance.ActiveHexes[i].SetActive(true);
+                UIManager.Instance.ShowHowMuchPlantsAreActiveInUIManager();
             }
         }
 
     }
-
-    private void HexValueChanged(object sender, ValueChangedEventArgs args)
-    {
-        if (args.DatabaseError != null)
-        {
-            Debug.LogError(args.DatabaseError.Message);
-            return;
-        }
-        else
-        {
-            if (args.Snapshot.Value != null)
-            {
-                Debug.Log("Last added items were " + args.Snapshot.GetRawJsonValue().ToString());
-                json = args.Snapshot.GetRawJsonValue();
-                allHexes = JsonUtility.FromJson<AllHexes>(json);
-                DatabaseChanges = json;
-                PopulateHexData();
-            }
-
-            else
-            {
-                Debug.Log("There are no records in the DB yet!");
-            }
-        }
-    }
-
-    void PopulatePlantData()
-    {
-        for (int i = 0; i < singlePlant.Length; i++)
-        {
-            singlePlant[i].PlantID = allPlants.Plants[i].ID;
-            singlePlant[i].value1 = allPlants.Plants[i].value1;
-            singlePlant[i].value2 = allPlants.Plants[i].value2;
-        }
-
-    }
-
-    void PopulateHexData()
-    {
-        for (int i = 0; i < singleHex.Length; i++)
-        {
-            singleHex[i].HexID = allPlants.Plants[i].ID;
-            singleHex[i].value1 = allPlants.Plants[i].value1;
-        }
-
-    }
-
 
     void HandleValueChanged(object sender, ValueChangedEventArgs args)
     {
@@ -123,8 +81,6 @@ public class FireBase : MonoBehaviour
                 json = args.Snapshot.GetRawJsonValue();
                 allPlants = JsonUtility.FromJson<AllPlants>(json);
                 DatabaseChanges = json;
-                PopulatePlantData();
-                PopulateHexData();
             }
 
             else

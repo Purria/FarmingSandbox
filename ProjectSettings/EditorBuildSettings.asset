@@ -5,9 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/UIScene.unity
-    guid: 45368fb797fedcb45be17a246c34dbb8
-  - enabled: 1
-    path: Assets/Scenes/3DPlainField.unity
-    guid: 52831a734f67753409d81ac69465581e
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  m_configObjects: {}
